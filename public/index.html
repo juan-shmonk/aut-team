@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects CRUD - Reportes Técnicos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">?</div>
+      <div>
+        <h1>Projects / Servicios</h1>
+        <p>Reportes técnicos - Instalaciones solares</p>
+      </div>
+    </div>
+
+    <div class="auth-box">
+      <div class="auth-title">Simular Usuario</div>
+      <div class="auth-row">
+        <label class="radio">
+          <input type="radio" name="role" value="admin" checked />
+          Modo Admin
+        </label>
+        <label class="radio">
+          <input type="radio" name="role" value="technician" />
+          Modo Técnico
+        </label>
+      </div>
+      <div class="auth-row">
+        <label class="field">
+          <span>x-user-id</span>
+          <input id="userId" type="text" value="test-admin-1" />
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="controls">
+      <div class="control-group">
+        <label class="field">
+          <span>Buscar</span>
+          <input id="searchInput" type="text" placeholder="Título, cliente o dirección" />
+        </label>
+        <label class="field">
+          <span>Status</span>
+          <select id="statusFilter">
+            <option value="">All</option>
+            <option value="DRAFT">DRAFT</option>
+            <option value="IN_PROGRESS">IN_PROGRESS</option>
+            <option value="DONE">DONE</option>
+            <option value="CANCELED">CANCELED</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="control-group">
+        <button id="createBtn" class="btn primary">Nuevo Proyecto</button>
+        <div class="pagination">
+          <button id="prevPage" class="btn">Prev</button>
+          <span id="pageInfo">1/1</span>
+          <button id="nextPage" class="btn">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="table-section">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Cliente</th>
+            <th>Status</th>
+            <th>Programado</th>
+            <th>Creado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="projectsTable">
+          <tr>
+            <td colspan="6" class="empty">Cargando...</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="formTitle">Crear Proyecto</h2>
+        <button id="closeModal" class="btn">Cerrar</button>
+      </div>
+
+      <form id="projectForm" class="form">
+        <div class="form-grid">
+          <label class="field">
+            <span>Título *</span>
+            <input name="title" type="text" required minlength="3" maxlength="120" />
+          </label>
+
+          <label class="field">
+            <span>Cliente *</span>
+            <input name="clientName" type="text" required minlength="2" maxlength="120" />
+          </label>
+
+          <label class="field">
+            <span>Email</span>
+            <input name="clientEmail" type="email" />
+          </label>
+
+          <label class="field">
+            <span>Teléfono</span>
+            <input name="phone" type="text" />
+          </label>
+
+          <label class="field">
+            <span>Dirección</span>
+            <input name="address" type="text" />
+          </label>
+
+          <label class="field">
+            <span>Status</span>
+            <select name="status">
+              <option value="DRAFT">DRAFT</option>
+              <option value="IN_PROGRESS">IN_PROGRESS</option>
+              <option value="DONE">DONE</option>
+              <option value="CANCELED">CANCELED</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Programado</span>
+            <input name="scheduledAt" type="datetime-local" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Descripción</span>
+          <textarea name="description" rows="4"></textarea>
+        </label>
+
+        <div id="formError" class="form-error hidden"></div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Guardar</button>
+          <button type="button" id="cancelBtn" class="btn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
